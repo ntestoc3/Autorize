@@ -225,9 +225,14 @@ class Mouseclick(MouseAdapter):
         self._extender = extender
 
     def mouseReleased(self, evt):
-        if evt.getComponent().getSelectedIndex() == 2:
+        sel_idx = evt.getComponent().getSelectedIndex()
+        if sel_idx == 2:
             if self._extender.expanded_requests == 0:
                 expand(self._extender, evt.getComponent())
             else:
                 collapse(self._extender, evt.getComponent())
-        
+        elif sel_idx in [0, 1]:
+            self._extender.original_requests_tabs.setSelectedIndex(sel_idx)
+            self._extender.unauthenticated_requests_tabs.setSelectedIndex(sel_idx)
+            self._extender.modified_requests_tabs.setSelectedIndex(sel_idx)
+

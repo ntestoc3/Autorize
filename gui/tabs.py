@@ -107,21 +107,21 @@ class Tabs():
         self._extender.original_requests_tabs.addTab("Original Request", self._extender._originalrequestViewer.getComponent())
         self._extender.original_requests_tabs.addTab("Original Response", self._extender._originalresponseViewer.getComponent())
         self._extender.original_requests_tabs.addTab("Expand", None)
-        self._extender.original_requests_tabs.setSelectedIndex(0)
+        self._extender.original_requests_tabs.setSelectedIndex(1)
 
         self._extender.unauthenticated_requests_tabs = JTabbedPane()
         self._extender.unauthenticated_requests_tabs.addMouseListener(Mouseclick(self._extender))
         self._extender.unauthenticated_requests_tabs.addTab("Unauthenticated Request", self._extender._unauthorizedrequestViewer.getComponent())
         self._extender.unauthenticated_requests_tabs.addTab("Unauthenticated Response", self._extender._unauthorizedresponseViewer.getComponent())
         self._extender.unauthenticated_requests_tabs.addTab("Expand", None)
-        self._extender.unauthenticated_requests_tabs.setSelectedIndex(0)
+        self._extender.unauthenticated_requests_tabs.setSelectedIndex(1)
 
         self._extender.modified_requests_tabs = JTabbedPane()
         self._extender.modified_requests_tabs.addMouseListener(Mouseclick(self._extender))
         self._extender.modified_requests_tabs.addTab("Modified Request", self._extender._requestViewer.getComponent())
         self._extender.modified_requests_tabs.addTab("Modified Response", self._extender._responseViewer.getComponent())
         self._extender.modified_requests_tabs.addTab("Expand", None)
-        self._extender.modified_requests_tabs.setSelectedIndex(0)
+        self._extender.modified_requests_tabs.setSelectedIndex(1)
 
         self._extender.requests_panel = JPanel(GridLayout(3,0))
         self._extender.requests_panel.add(self._extender.modified_requests_tabs)
@@ -148,8 +148,9 @@ class SendRequestRepeater(ActionListener):
                 request = self._extender._currentlyDisplayedItem._requestResponse
         host = request.getHttpService().getHost()
         port = request.getHttpService().getPort()
+        https = request.getHttpService().getProtocol() == "https"
         
-        self._callbacks.sendToRepeater(host, port, 1, request.getRequest(), "Autorize");
+        self._callbacks.sendToRepeater(host, port, https, request.getRequest(), "Autorize");
 
 class SendResponseComparer(ActionListener):
     def __init__(self, extender, callbacks):

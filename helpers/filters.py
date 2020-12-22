@@ -3,6 +3,7 @@
 
 from java.awt import GridLayout
 
+
 def addFilterHelper(typeObj, model, textObj):
         typeName = typeObj.getSelectedItem().split(":")[0]
         model.addElement(typeName + ": " + textObj.getText().strip())
@@ -25,7 +26,7 @@ def modFilterHelper(listObj, typeObj, textObj):
                 listObj.getModel().remove(index)
 
 def expand(extender, comp):
-        comp.setSelectedIndex(0)
+        comp.setSelectedIndex(1) # display response
         comp.setTitleAt(2, "Collapse")
         extender.requests_panel.remove(extender.modified_requests_tabs)
         extender.requests_panel.remove(extender.original_requests_tabs)
@@ -36,7 +37,7 @@ def expand(extender, comp):
         extender.expanded_requests = 1
 
 def collapse(extender, comp):
-        comp.setSelectedIndex(0)
+        comp.setSelectedIndex(1)
         comp.setTitleAt(2, "Expand")
         extender.requests_panel.setLayout(GridLayout(3,0))
         extender.requests_panel.add(extender.modified_requests_tabs)
